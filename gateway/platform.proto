@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package gateway;
+
+option go_package = "github.com/dinhtp/lets-run-pbtype/gateway";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+// Enable custom Marshal method.
+option (gogoproto.marshaler_all) = true;
+// Enable custom Unmarshal method.
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+message Platform {
+    string id = 1;
+    string type = 2;
+    string domain = 3;
+    string api_url = 4;
+    string client_id = 5;
+    string client_secret = 6;
+    string access_token = 7;
+
+    string created_at = 10;
+    string updated_at = 11;
+}
+
+message OnePlatformRequest {
+    string id = 1;
+}
+
+message ListPlatformRequest {
+    string type = 1;
+}
+
+message ListPlatformResponse {
+    repeated Platform items = 1;
+    uint32 max_page = 2;
+    uint32 total_count = 3;
+    uint32 page = 4;
+    uint32 limit = 5;
+}
+
+service PlatformService {
+    rpc Get(OnePlatformRequest) returns (Platform) {
+        option (google.api.http) = {
+            get: "/run/platform/{id}"
+        };
+    };
+    rpc Create(Platform) returns (Platform) {
+        option (google.api.http) = {
+            post: "/run/platform"
+            body: "*"
+        };
+    };
+    rpc Update(Platform) returns (Platform) {
+        option (google.api.http) = {
+            put: "/run/platform/{id}"
+            body: "*"
+        };
+    };
+    rpc Delete(OnePlatformRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/run/platform/{id}"
+        };
+    };
+    rpc List(ListPlatformRequest) returns (ListPlatformResponse) {
+        option (google.api.http) = {
+            get: "/run/platforms"
+        };
+    };
+}

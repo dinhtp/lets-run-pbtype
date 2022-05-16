@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package gateway;
+
+option go_package = "github.com/dinhtp/lets-run-pbtype/gateway";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+// Enable custom Marshal method.
+option (gogoproto.marshaler_all) = true;
+// Enable custom Unmarshal method.
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+message Customer {
+    string id = 1;
+    string platform_id = 2;
+    string first_name = 3;
+    string middle_name = 4;
+    string last_name = 5;
+    string email = 6;
+    string phone = 7;
+
+    string created_at = 10;
+    string updated_at = 11;
+}
+
+message OneCustomerRequest {
+    string id = 1;
+    string platform_id = 2;
+}
+
+message ListCustomerRequest {
+    string platform_id = 1;
+}
+
+message ListCustomerResponse {
+    repeated Customer items = 1;
+    uint32 max_page = 2;
+    uint32 total_count = 3;
+    uint32 page = 4;
+    uint32 limit = 5;
+}
+
+service CustomerService {
+    rpc Get(OneCustomerRequest) returns (Customer) {
+        option (google.api.http) = {
+            get: "/run/{platform_id}/customer/{id}"
+        };
+    };
+    rpc Create(Customer) returns (Customer) {
+        option (google.api.http) = {
+            post: "/run/{platform_id}/customer"
+            body: "*"
+        };
+    };
+    rpc Update(Customer) returns (Customer) {
+        option (google.api.http) = {
+            put: "/run/{platform_id}/customer/{id}"
+            body: "*"
+        };
+    };
+    rpc Delete(OneCustomerRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/run/{platform_id}/customer/{id}"
+        };
+    };
+    rpc List(ListCustomerRequest) returns (ListCustomerResponse) {
+        option (google.api.http) = {
+            get: "/run/{platform_id}/customers"
+        };
+    };
+}

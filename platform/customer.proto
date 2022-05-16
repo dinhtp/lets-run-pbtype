@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package platform;
+
+option go_package = "github.com/dinhtp/lets-run-pbtype/platform";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/empty.proto";
+import "gateway/platform.proto";
+import "gateway/customer.proto";
+
+// Enable custom Marshal method.
+option (gogoproto.marshaler_all) = true;
+// Enable custom Unmarshal method.
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+message CreateUpdateCustomerRequest {
+    gateway.Platform client = 1;
+    gateway.Customer customer = 2;
+}
+
+message OneCustomerRequest {
+    gateway.Platform client = 1;
+    string id = 2;
+}
+
+message ListCustomerRequest {
+    gateway.Platform client = 1;
+}
+
+message ListCustomerResponse {
+    repeated gateway.Customer items = 1;
+    uint32 max_page = 2;
+    uint32 total_count = 3;
+    uint32 page = 4;
+    uint32 limit = 5;
+}
+
+service CustomerService {
+    rpc Get(OneCustomerRequest) returns (gateway.Customer);
+    rpc Create(CreateUpdateCustomerRequest) returns (gateway.Customer);
+    rpc Update(CreateUpdateCustomerRequest) returns (gateway.Customer);
+    rpc Delete(OneCustomerRequest) returns (google.protobuf.Empty);
+    rpc List(ListCustomerRequest) returns (ListCustomerResponse);
+}
