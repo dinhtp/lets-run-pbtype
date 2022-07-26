@@ -22,11 +22,10 @@ option (gogoproto.messagename_all) = true;
 message Platform {
     string id = 1;
     string type = 2;
-    string domain = 3;
+    string name = 3;
     string api_url = 4;
-    string client_id = 5;
-    string client_secret = 6;
-    string access_token = 7;
+    string access_token = 5;
+    string access_token_secret = 6;
 
     string created_at = 10;
     string updated_at = 11;

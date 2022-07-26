@@ -21,9 +21,9 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *CreateUpdateCustomerRequest) Validate() error {
-	if this.Client != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Client); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Client", err)
+	if this.Platform != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Platform); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Platform", err)
 		}
 	}
 	if this.Customer != nil {
@@ -34,17 +34,17 @@ func (this *CreateUpdateCustomerRequest) Validate() error {
 	return nil
 }
 func (this *OneCustomerRequest) Validate() error {
-	if this.Client != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Client); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Client", err)
+	if this.Platform != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Platform); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Platform", err)
 		}
 	}
 	return nil
 }
 func (this *ListCustomerRequest) Validate() error {
-	if this.Client != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Client); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Client", err)
+	if this.Platform != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Platform); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Platform", err)
 		}
 	}
 	return nil

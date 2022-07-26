@@ -36,6 +36,12 @@
         "phone": {
           "type": "string"
         },
+        "note": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
         "created_at": {
           "type": "string"
         },
@@ -53,19 +59,16 @@
         "type": {
           "type": "string"
         },
-        "domain": {
+        "name": {
           "type": "string"
         },
         "api_url": {
           "type": "string"
         },
-        "client_id": {
-          "type": "string"
-        },
-        "client_secret": {
-          "type": "string"
-        },
         "access_token": {
+          "type": "string"
+        },
+        "access_token_secret": {
           "type": "string"
         },
         "created_at": {

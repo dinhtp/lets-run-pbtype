@@ -21,17 +21,17 @@ option (gogoproto.goproto_registration) = true;
 option (gogoproto.messagename_all) = true;
 
 message CreateUpdateCustomerRequest {
-    gateway.Platform client = 1;
+    gateway.Platform platform = 1;
     gateway.Customer customer = 2;
 }
 
 message OneCustomerRequest {
-    gateway.Platform client = 1;
+    gateway.Platform platform = 1;
     string id = 2;
 }
 
 message ListCustomerRequest {
-    gateway.Platform client = 1;
+    gateway.Platform platform = 1;
 }
 
 message ListCustomerResponse {

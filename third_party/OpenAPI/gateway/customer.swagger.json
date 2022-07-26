@@ -217,6 +217,12 @@
         "phone": {
           "type": "string"
         },
+        "note": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
         "created_at": {
           "type": "string"
         },
