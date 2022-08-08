@@ -32,6 +32,8 @@ message OneCustomerRequest {
 
 message ListCustomerRequest {
     gateway.Platform platform = 1;
+    uint32 page = 2;
+    uint32 limit = 3;
 }
 
 message ListCustomerResponse {

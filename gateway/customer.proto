@@ -40,6 +40,8 @@ message OneCustomerRequest {
 
 message ListCustomerRequest {
     string platform_id = 1;
+    uint32 page = 2;
+    uint32 limit = 3;
 }
 
 message ListCustomerResponse {

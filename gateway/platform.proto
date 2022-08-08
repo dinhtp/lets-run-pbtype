@@ -37,6 +37,8 @@ message OnePlatformRequest {
 
 message ListPlatformRequest {
     string type = 1;
+    uint32 page = 2;
+    uint32 limit = 3;
 }
 
 message ListPlatformResponse {
